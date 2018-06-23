@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyFavoriteScriptCommand
+namespace MyFavoriteScriptCommand.Scenes
 {
     /// <summary>
     /// ねがいごとを選択するシーンです。
@@ -19,15 +19,15 @@ namespace MyFavoriteScriptCommand
             Console.WriteLine("ビッパ「あっしの ねがいごとは……えーと……");
             Console.WriteLine("エート……");
             var wishes = new List<Wish>()
-                {
-                    new Wish(content:"おかねに なりたい!", action:() => throw new NotImplementedException("なんだ! よくだらけじゃないか!")),
-                    new Wish(content:"さいきょうベトベタスイッチ", action:() => throw new NotImplementedException("ホラーが はっせいしました")),
-                    new Wish(content:"いかを みればいいのか!", action:() => throw new NotImplementedException("そこはかとなく しずめてみよう……")),
-                    new Wish(content:"おいしいもちに なりたい!", action:() => throw new NotImplementedException("んで もやしたってワケ♪")),
-                    new Wish(content:"ひたすら デバッグ", action:() => throw new NotImplementedException("いっしょう デバッグ")),
-                    new Wish(content:"どうぐあつかい", action:() => throw new NotImplementedException("リサイクルしちゃうぞー!")),
-                    new Wish(content:"ふざけるなッ! ヨノワール!", action:DoNotBeSillyDusknoir),
-                };
+            {
+                new Wish(content:"おかねに なりたい!", action:() => throw new NotImplementedException("なんだ! よくだらけじゃないか!")),
+                new Wish(content:"さいきょうベトベタスイッチ", action:() => throw new NotImplementedException("ホラーが はっせいしました")),
+                new Wish(content:"いかを みればいいのか!", action:() => throw new NotImplementedException("そこはかとなく しずめてみよう……")),
+                new Wish(content:"おいしいもちに なりたい!", action:() => throw new NotImplementedException("んで もやしたってワケ♪")),
+                new Wish(content:"ひたすら デバッグ", action:() => throw new NotImplementedException("いっしょう デバッグ")),
+                new Wish(content:"どうぐあつかい", action:() => throw new NotImplementedException("リサイクルしちゃうぞー!")),
+                new Wish(content:"ふざけるなッ! ヨノワール!", action:DoNotBeSillyDusknoir),
+            };
             Wish selectedWish = Select(wishes, "ねがいごとを えらんでください");
 
             selectedWish.Grant();

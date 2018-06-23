@@ -1,5 +1,6 @@
 ﻿using System;
 using MyFavoriteScriptCommand.Core;
+using MyFavoriteScriptCommand.Scenes;
 using Tips.ConsoleApp;
 
 namespace MyFavoriteScriptCommand
