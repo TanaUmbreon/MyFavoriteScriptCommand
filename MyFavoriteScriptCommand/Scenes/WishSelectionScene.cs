@@ -1,9 +1,7 @@
-﻿using MyFavoriteScriptCommand.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MyFavoriteScriptCommand.Core;
 
 namespace MyFavoriteScriptCommand.Scenes
 {
@@ -20,40 +18,17 @@ namespace MyFavoriteScriptCommand.Scenes
             Console.WriteLine("エート……");
             var wishes = new List<Wish>()
             {
-                new Wish(content:"おかねに なりたい!", action:() => throw new NotImplementedException("なんだ! よくだらけじゃないか!")),
-                new Wish(content:"さいきょうベトベタスイッチ", action:() => throw new NotImplementedException("ホラーが はっせいしました")),
-                new Wish(content:"いかを みればいいのか!", action:() => throw new NotImplementedException("そこはかとなく しずめてみよう……")),
-                new Wish(content:"おいしいもちに なりたい!", action:() => throw new NotImplementedException("んで もやしたってワケ♪")),
-                new Wish(content:"ひたすら デバッグ", action:() => throw new NotImplementedException("いっしょう デバッグ")),
-                new Wish(content:"どうぐあつかい", action:() => throw new NotImplementedException("リサイクルしちゃうぞー!")),
-                new Wish(content:"ふざけるなッ! ヨノワール!", action:DoNotBeSillyDusknoir),
+                new Wish(content:"おかねに なりたい!", nextScene:new NotImplementedScene("なんだ! よくだらけじゃないか!")),
+                new Wish(content:"さいきょうベトベタスイッチ", nextScene:new NotImplementedScene("ホラーが はっせいしました")),
+                new Wish(content:"いかを みればいいのか!", nextScene:new NotImplementedScene("そこはかとなく しずめてみよう……")),
+                new Wish(content:"おいしいもちに なりたい!", nextScene:new NotImplementedScene("んで もやしたってワケ♪")),
+                new Wish(content:"ひたすら デバッグ", nextScene:new NotImplementedScene("いっしょう デバッグ")),
+                new Wish(content:"どうぐあつかい", nextScene:new NotImplementedScene("リサイクルしちゃうぞー!")),
+                new Wish(content:"ふざけるなッ! ヨノワール!", nextScene:new SelectedDoNotBeSillyDusknoirScene()),
             };
+
             Wish selectedWish = Select(wishes, "ねがいごとを えらんでください");
-
-            selectedWish.Grant();
-        }
-
-        private void DoNotBeSillyDusknoir()
-        {
-            Console.WriteLine();
-            Console.WriteLine("だが そんな てに ひっかかる");
-            Console.WriteLine("オレたちじゃないぜッ!");
-            Console.WriteLine("> はい");
-            Console.WriteLine("  いいえ");
-            Console.ReadKey(intercept: true);
-
-            Console.WriteLine();
-            Console.WriteLine("ホントに ホェェェェェェェッ!!");
-            Console.WriteLine("> はい");
-            Console.WriteLine("  いいえのさばくの まもりがみ!");
-            Console.ReadKey(intercept: true);
-
-            Console.WriteLine();
-            Console.WriteLine("以降の実装は消えてなくなりました。");
-            Console.WriteLine("これ ダークライの しわざです。");
-            Console.WriteLine();
-
-            CanExit = true;
+            context.CurrentScene = selectedWish.NextScene;
         }
 
         /// <summary>
