@@ -42,11 +42,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\IScene.cs" />
+    <Compile Include="Core\ISceneContext.cs" />
+    <Compile Include="Core\SceneLoop.cs" />
     <Compile Include="Tips.ConsoleApp\ConsoleEx.cs" />
     <Compile Include="IChoice.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wish.cs" />
+    <Compile Include="Scenes\WishSelectionScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
