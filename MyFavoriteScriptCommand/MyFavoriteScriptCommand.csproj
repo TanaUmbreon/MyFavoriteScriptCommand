@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Core\IScene.cs" />
     <Compile Include="Core\ISceneContext.cs" />
+    <Compile Include="Core\Scene.cs" />
     <Compile Include="Core\SceneLoop.cs" />
     <Compile Include="Scenes\NotImplementedScene.cs" />
     <Compile Include="Scenes\SelectedDoNotBeSillyDusknoirScene.cs" />
