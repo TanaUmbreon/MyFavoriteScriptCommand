@@ -8,11 +8,9 @@ namespace MyFavoriteScriptCommand.Scenes
     /// <summary>
     /// ねがいごとを選択するシーンです。
     /// </summary>
-    public class WishSelectionScene : IScene
+    public class WishSelectionScene : Scene
     {
-        public bool CanExit { get; set; } = false;
-
-        public void Run(ISceneContext context)
+        public override void Run(ISceneContext context)
         {
             Console.WriteLine("ビッパ「あっしの ねがいごとは……えーと……");
             Console.WriteLine("エート……");

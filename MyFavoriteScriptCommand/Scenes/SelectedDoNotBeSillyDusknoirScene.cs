@@ -6,11 +6,9 @@ namespace MyFavoriteScriptCommand.Scenes
     /// <summary>
     /// ねがいごとで「ふざけるなッ! ヨノワール!」を選択した後のシーンです。
     /// </summary>
-    public class SelectedDoNotBeSillyDusknoirScene : IScene
+    public class SelectedDoNotBeSillyDusknoirScene : Scene
     {
-        public bool CanExit { get; set; } = false;
-
-        public void Run(ISceneContext context)
+        public override void Run(ISceneContext context)
         {
             Console.WriteLine();
             Console.WriteLine("だが そんな てに ひっかかる");
