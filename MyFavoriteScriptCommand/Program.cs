@@ -22,10 +22,31 @@ namespace MyFavoriteScriptCommand
                 Console.WriteLine();
                 Console.WriteLine("操作はキャンセルされました");
             }
+            catch (Exception ex)
+            {
+                ShowErrorMessage(ex);
+            }
             finally
             {
-                ConsoleEx.Timeout(milliseconds:10000);
+                ConsoleEx.Timeout(milliseconds:15000);
             }
+        }
+
+        private static void ShowErrorMessage(Exception ex)
+        {
+            var before = Console.ForegroundColor;
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine();
+            Console.WriteLine(ex.Message);
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"{AssemblyInfo.Title} は動作を停止しました。");
+
+            Console.ForegroundColor = before;
+            Console.WriteLine();
+            Console.WriteLine(ex.StackTrace);
+            Console.WriteLine();
         }
     }
 }

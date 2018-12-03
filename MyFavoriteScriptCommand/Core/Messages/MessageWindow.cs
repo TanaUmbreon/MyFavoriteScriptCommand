@@ -79,7 +79,6 @@ namespace MyFavoriteScriptCommand.Core.Messages
             {
                 Console.WriteLine($"  {choice.Index}: {choice.Value.Message}");
             }
-            Console.WriteLine();
 
             var input = new VirtualInput();
             while (true)
