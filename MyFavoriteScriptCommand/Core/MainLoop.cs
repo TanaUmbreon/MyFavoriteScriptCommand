@@ -8,7 +8,7 @@
         /// <summary>
         /// 次に実行するシーンのセットを取得または設定します。
         /// </summary>
-        public ISceneSet NextSceneSet { get; set; } = null;
+        public ISceneSet NextSceneSet { get; set; }
 
         /// <summary>
         /// <see cref="MainLoop"/> の新しいインスタンスを生成します。

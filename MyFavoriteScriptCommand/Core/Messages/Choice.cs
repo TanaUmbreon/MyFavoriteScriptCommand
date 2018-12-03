@@ -8,12 +8,12 @@
         /// <summary>
         /// 選択肢のメッセージを取得します。
         /// </summary>
-        public string Message { get; }
+        public string Message { get; private set; }
 
         /// <summary>
         /// 選択した時に遷移する次のシーン実行メソッドを取得します。
         /// </summary>
-        public SceneCallback NextScene { get; }
+        public SceneCallback NextScene { get; private set; }
 
         /// <summary>
         /// <see cref="Choice"/> の新しいインスタンスを生成します。

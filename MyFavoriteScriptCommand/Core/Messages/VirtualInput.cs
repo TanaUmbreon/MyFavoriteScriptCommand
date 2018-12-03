@@ -55,7 +55,8 @@ namespace MyFavoriteScriptCommand.Core.Messages
         public VirtualKey GetKey()
         {
             var input = Console.ReadKey(intercept: true);
-            keyMap.TryGetValue(input.Key, out var key);
+            VirtualKey key;
+            keyMap.TryGetValue(input.Key, out key);
             return key;
         }
     }

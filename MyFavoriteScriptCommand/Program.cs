@@ -41,7 +41,7 @@ namespace MyFavoriteScriptCommand
             Console.WriteLine(ex.Message);
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"{AssemblyInfo.Title} は動作を停止しました。");
+            Console.WriteLine(AssemblyInfo.Title + " は動作を停止しました。");
 
             Console.ForegroundColor = before;
             Console.WriteLine();

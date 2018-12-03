@@ -9,27 +9,13 @@ namespace MyFavoriteScriptCommand.Core.Messages
     /// </summary>
     public static class MessageWindow
     {
-        #region 文字色
-
-        /// <summary>
-        /// 通常テキストの文字色を取得します。
-        /// </summary>
-        private static ConsoleColor TextColor { get; } = ConsoleColor.White;
-
-        /// <summary>
-        /// カーソルの文字色を取得します。
-        /// </summary>
-        private static ConsoleColor CorsorColor { get; } = ConsoleColor.Yellow;
-
-        #endregion
-
         /// <summary>
         /// メッセージ ウィンドウをクリアして、指定したメッセージを表示します。
         /// </summary>
         /// <param name="message">表示するメッセージ。</param>
         private static void InternalShow(string message)
         {
-            if (message == null) throw new ArgumentNullException(nameof(message));
+            if (message == null) throw new ArgumentNullException("message");
             
             Console.Clear();
             Console.Write(message);
@@ -64,12 +50,12 @@ namespace MyFavoriteScriptCommand.Core.Messages
         /// <returns>ユーザーが選択した選択肢を返します。</returns>
         public static Choice ShowChoices(string message, params Choice[] choices)
         {
-            if (choices == null) throw new ArgumentNullException(nameof(choices));
-            if (!choices.Any()) throw new ArgumentException("選択肢が一つもありません。", nameof(choices));
+            if (choices == null) { throw new ArgumentNullException("choices"); }
+            if (!choices.Any()) { throw new ArgumentException("選択肢が一つもありません。", "choices"); }
 
             const int MaxChoicesCount = 9;
             int count = choices.Count();
-            if (count > MaxChoicesCount) throw new ArgumentException("選択肢の上限は 9 つまでです。");
+            if (count > MaxChoicesCount) { throw new ArgumentException("選択肢の上限は 9 つまでです。"); }
 
             InternalShow(message);
             Console.WriteLine();
@@ -77,7 +63,7 @@ namespace MyFavoriteScriptCommand.Core.Messages
             // 選択肢のキー番号は 1 始まりとする
             foreach (var choice in choices.Select((c, i) => new { Value = c, Index = i + 1 }))
             {
-                Console.WriteLine($"  {choice.Index}: {choice.Value.Message}");
+                Console.WriteLine(string.Format("  {0}: {1}", choice.Index, choice.Value.Message));
             }
 
             var input = new VirtualInput();

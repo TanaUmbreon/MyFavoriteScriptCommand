@@ -16,7 +16,10 @@ namespace Tips.ConsoleApp
         /// 指定した時間が経過するもしくは、ユーザーが任意のキーを押すまでプログラムを待機します。
         /// </summary>
         /// <param name="milliseconds">待機する時間 (ミリ秒単位)。</param>
-        public static void Timeout(long milliseconds)  => Timeout(TimeSpan.FromMilliseconds(milliseconds));
+        public static void Timeout(long milliseconds)
+        {
+            Timeout(TimeSpan.FromMilliseconds(milliseconds));
+        }
 
         /// <summary>
         /// 指定した時間が経過するもしくは、ユーザーが任意のキーを押すまでプログラムを待機します。
@@ -24,7 +27,7 @@ namespace Tips.ConsoleApp
         /// <param name="timeout">待機する時間を表す <see cref="TimeSpan"/> 構造体。</param>
         public static void Timeout(TimeSpan timeout)
         {
-            Console.Write($"{timeout.TotalSeconds:0} 秒待っています。続行するには何かキーを押してください ...");
+            Console.Write(string.Format("{0:0} 秒待っています。続行するには何かキーを押してください ...", timeout.TotalSeconds));
 
             // キー入力待機は入力されるまで処理が止まるので、別のスレッドで行う
             PressedKey = false;
