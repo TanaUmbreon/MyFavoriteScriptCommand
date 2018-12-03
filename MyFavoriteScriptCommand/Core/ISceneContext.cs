@@ -6,8 +6,13 @@
     public interface ISceneContext
     {
         /// <summary>
-        /// 現在のシーンを取得または設定します。
+        /// 次に実行するシーンのセットを取得または設定します。
         /// </summary>
-        IScene CurrentScene { get; set; }
+        ISceneSet NextSceneSet { get; set; }
+
+        /// <summary>
+        /// 現在呼び出されているシーン実行メソッドが終了した後にアプリケーションを終了します。
+        /// </summary>
+        void Quit();
     }
 }

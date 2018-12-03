@@ -11,7 +11,10 @@ namespace MyFavoriteScriptCommand
         {
             try
             {
-                var loop = new SceneLoop() { CurrentScene = new WishSelectionScene() };
+                var loop = new MainLoop()
+                {
+                    NextSceneSet = new MethodOfOperationScene(),
+                };
                 loop.Run();
             }
             catch (OperationCanceledException)

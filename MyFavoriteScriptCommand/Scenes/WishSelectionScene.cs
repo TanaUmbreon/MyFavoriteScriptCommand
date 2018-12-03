@@ -2,60 +2,80 @@
 using System.Collections.Generic;
 using System.Linq;
 using MyFavoriteScriptCommand.Core;
+using MyFavoriteScriptCommand.Core.Messages;
 
 namespace MyFavoriteScriptCommand.Scenes
 {
     /// <summary>
     /// ねがいごとを選択するシーンです。
     /// </summary>
-    public class WishSelectionScene : Scene
+    public class WishSelectionScene : SceneSet
     {
-        public override void Run(ISceneContext context)
+        /// <summary>
+        /// <see cref="WishSelectionScene"/> の新しいインスタンスを生成します。
+        /// </summary>
+        public WishSelectionScene()
         {
-            Console.WriteLine("ビッパ「あっしの ねがいごとは……えーと……");
-            Console.WriteLine("エート……");
-            var wishes = new List<Wish>()
-            {
-                new Wish(content:"おかねに なりたい!", nextScene:new NotImplementedScene("なんだ! よくだらけじゃないか!")),
-                new Wish(content:"さいきょうベトベタスイッチ", nextScene:new NotImplementedScene("ホラーが はっせいしました")),
-                new Wish(content:"いかを みればいいのか!", nextScene:new NotImplementedScene("そこはかとなく しずめてみよう……")),
-                new Wish(content:"おいしいもちに なりたい!", nextScene:new NotImplementedScene("んで もやしたってワケ♪")),
-                new Wish(content:"ひたすら デバッグ", nextScene:new NotImplementedScene("いっしょう デバッグ")),
-                new Wish(content:"どうぐあつかい", nextScene:new NotImplementedScene("リサイクルしちゃうぞー!")),
-                new Wish(content:"ふざけるなッ! ヨノワール!", nextScene:new SelectedDoNotBeSillyDusknoirScene()),
-            };
+            NextScene = Scene1;
+        }
 
-            Wish selectedWish = Select(wishes, "ねがいごとを えらんでください");
-            context.CurrentScene = selectedWish.NextScene;
+        private void Scene1(ISceneContext context)
+        {
+            var selected = MessageWindow.ShowChoices(
+                "ビッパ「あっしの ねがいごとは……えーと……\n" +
+                "エート……",
+                new Choice(message: "おかねに なりたい!",         nextScene: c => ThrowException("なんだ! よくだらけじゃないか!")),
+                new Choice(message: "さいきょうベトベタスイッチ", nextScene: c => ThrowException("ホラーが はっせいしました")),
+                new Choice(message: "いかを みればいいのか!",     nextScene: c => ThrowException("そこはかとなく しずめてみよう……")),
+                new Choice(message: "おいしいもちに なりたい!",   nextScene: c => ThrowException("んで もやしたってワケ♪")),
+                new Choice(message: "ひたすら デバッグ",          nextScene: c => ThrowException("いっしょう デバッグ")),
+                new Choice(message: "どうぐあつかい",             nextScene: c => ThrowException("リサイクルしちゃうぞー!")),
+                new Choice(message: "ふざけるなッ! ヨノワール!",  nextScene: Scene2)
+                );
+
+            NextScene = selected.NextScene;
+        }
+
+        private void Scene2(ISceneContext context)
+        {
+            var selected = MessageWindow.ShowChoices(
+                "だが そんな てに ひっかかる\n" +
+                "オレたちじゃないぜッ!",
+                new YesChoice(nextScene: Scene3),
+                new NoChoice(nextScene: Scene2)
+                );
+
+            NextScene = selected.NextScene;
+        }
+
+        private void Scene3(ISceneContext context)
+        {
+            var selected = MessageWindow.ShowChoices(
+                "ホントに ホェェェェェェェッ!!",
+                new YesChoice(nextScene: Scene4),
+                new NoChoice(message: "いいえのさばくの まもりがみ!", nextScene: Scene3)
+                );
+
+            NextScene = selected.NextScene;
+        }
+
+        private void Scene4(ISceneContext context)
+        {
+            MessageWindow.Show(
+                "以降の実装は消えてなくなりました。\n" +
+                "これ ダークライの しわざです。"
+                );
+
+            context.Quit();
         }
 
         /// <summary>
-        /// 指定した選択肢のコレクションからユーザーが選択した選択肢を返します。
+        /// 未実装の例外 (<see cref="NotImplementedException"/>) を発生させます。
         /// </summary>
-        /// <typeparam name="T">選択肢の型。</typeparam>
-        /// <param name="choices">選択肢のコレクション。</param>
-        /// <param name="message">入力を促すためのメッセージ。</param>
-        /// <returns>ユーザーが選択した選択肢。</returns>
-        /// <exception cref="OperationCanceledException">ユーザーがエスケープ キーを入力した時に発生します。</exception>
-        private T Select<T>(List<T> choices, string message) where T : IChoice
+        /// <param name="message">例外の原因を説明するエラー メッセージ。</param>
+        private void ThrowException(string message)
         {
-            foreach (var choice in choices.Select((c, i) => new { Value = c, Index = i }))
-            {
-                Console.WriteLine($"  {choice.Index}: {choice.Value.Content}");
-            }
-            Console.WriteLine();
-
-            Console.WriteLine(message);
-            while (true)
-            {
-                var input = Console.ReadKey(intercept: true);
-                if (input.Key == ConsoleKey.Escape) throw new OperationCanceledException();
-
-                if (!Int32.TryParse(input.KeyChar.ToString(), out int index)) continue;
-                if (index < 0 || index >= choices.Count) continue;
-
-                return choices[index];
-            }
+            throw new NotImplementedException("リサイクルしちゃうぞー!");
         }
     }
 }

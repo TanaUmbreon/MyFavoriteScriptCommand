@@ -42,17 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\IScene.cs" />
+    <Compile Include="Core\ISceneSet.cs" />
     <Compile Include="Core\ISceneContext.cs" />
-    <Compile Include="Core\Scene.cs" />
-    <Compile Include="Core\SceneLoop.cs" />
-    <Compile Include="Scenes\NotImplementedScene.cs" />
-    <Compile Include="Scenes\SelectedDoNotBeSillyDusknoirScene.cs" />
+    <Compile Include="Core\Messages\MessageWindow.cs" />
+    <Compile Include="Core\SceneSet.cs" />
+    <Compile Include="Core\MainLoop.cs" />
+    <Compile Include="Core\SceneCallback.cs" />
+    <Compile Include="Core\Messages\VirtualInput.cs" />
+    <Compile Include="Core\Messages\VirtualKey.cs" />
+    <Compile Include="Core\Messages\NoChoice.cs" />
+    <Compile Include="Core\Messages\YesChoice.cs" />
+    <Compile Include="Scenes\MethodOfOperationScene.cs" />
     <Compile Include="Tips.ConsoleApp\ConsoleEx.cs" />
-    <Compile Include="IChoice.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Wish.cs" />
+    <Compile Include="Core\Messages\Choice.cs" />
     <Compile Include="Scenes\WishSelectionScene.cs" />
   </ItemGroup>
   <ItemGroup>
