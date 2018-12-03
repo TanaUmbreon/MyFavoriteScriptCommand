@@ -27,9 +27,9 @@ namespace MyFavoriteScriptCommand.Scenes
                 "だいすきなSCRIPT_COMMAND\n" +
                 "------------------------\n" +
                 "【操作方法】\n" +
-                "決定        : Enterキー\n" +
-                "カーソル移動: ↑キー, ↓キー\n" +
-                "強制終了    : Escキー\n" +
+                "決定    : Enterキー\n" +
+                "選択肢  : 数字キー\n" +
+                "強制終了: Escキー\n" +
                 "\n" +
                 "決定キーを押すと続行します..."
                 );

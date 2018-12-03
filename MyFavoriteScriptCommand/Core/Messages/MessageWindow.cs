@@ -56,8 +56,6 @@ namespace MyFavoriteScriptCommand.Core.Messages
             }
         }
 
-        #region ShowChoices
-
         /// <summary>
         /// 指定した選択肢の一覧を表示し、ユーザーが選択した選択肢を返します。
         /// </summary>
@@ -69,76 +67,58 @@ namespace MyFavoriteScriptCommand.Core.Messages
             if (choices == null) throw new ArgumentNullException(nameof(choices));
             if (!choices.Any()) throw new ArgumentException("選択肢が一つもありません。", nameof(choices));
 
+            const int MaxChoicesCount = 9;
+            int count = choices.Count();
+            if (count > MaxChoicesCount) throw new ArgumentException("選択肢の上限は 9 つまでです。");
+
             InternalShow(message);
+            Console.WriteLine();
 
-            var cursor = new CursorController(choices);
+            // 選択肢のキー番号は 1 始まりとする
+            foreach (var choice in choices.Select((c, i) => new { Value = c, Index = i + 1 }))
+            {
+                Console.WriteLine($"  {choice.Index}: {choice.Value.Message}");
+            }
+            Console.WriteLine();
+
             var input = new VirtualInput();
-
             while (true)
             {
-                foreach (var choice in choices)
-                {
-                    Console.WriteLine(choice.Message);
-                }
-
                 switch (input.GetKey())
                 {
-                    case VirtualKey.Down:
-                        cursor.Down();
+                    // ↓クソみたいなハードコードだけどいい子は真似しちゃダメだぞ☆
+                    case VirtualKey.Num1:
+                        if (count > 0) { return choices[0]; }
                         break;
-                    case VirtualKey.Up:
-                        cursor.Up();
+                    case VirtualKey.Num2:
+                        if (count > 1) { return choices[1]; }
                         break;
-                    case VirtualKey.Commit:
-                        return cursor.CurrentOption;
+                    case VirtualKey.Num3:
+                        if (count > 2) { return choices[2]; }
+                        break;
+                    case VirtualKey.Num4:
+                        if (count > 3) { return choices[3]; }
+                        break;
+                    case VirtualKey.Num5:
+                        if (count > 4) { return choices[4]; }
+                        break;
+                    case VirtualKey.Num6:
+                        if (count > 5) { return choices[5]; }
+                        break;
+                    case VirtualKey.Num7:
+                        if (count > 6) { return choices[6]; }
+                        break;
+                    case VirtualKey.Num8:
+                        if (count > 7) { return choices[7]; }
+                        break;
+                    case VirtualKey.Num9:
+                        if (count > 8) { return choices[8]; }
+                        break;
+
                     case VirtualKey.Quit:
                         throw new OperationCanceledException();
                 }
             }
         }
-        
-        /// <summary>
-        /// 選択肢のカーソル操作を行います。
-        /// </summary>
-        private class CursorController
-        {
-            private LinkedList<CursorItem> items;
-
-            /// <summary>
-            /// 選択中の選択肢を取得します。
-            /// </summary>
-            public Choice CurrentOption { get; private set; }
-
-            /// <summary>
-            /// <see cref="CursorController"/> の新しいインスタンスを生成します。
-            /// </summary>
-            /// <param name="options">表示する選択肢の一覧。</param>
-            public CursorController(IEnumerable<Choice> options)
-            {
-                items = new LinkedList<CursorItem>(options.Select(o => new CursorItem()));
-            }
-
-            internal void Up()
-            {
-                throw new NotImplementedException();
-            }
-
-            internal void Down()
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        private class CursorItem
-        {
-
-
-            public CursorItem()
-            {
-
-            }
-        }
-
-        #endregion
     }
 }

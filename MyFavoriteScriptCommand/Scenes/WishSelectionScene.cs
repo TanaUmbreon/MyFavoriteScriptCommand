@@ -63,7 +63,7 @@ namespace MyFavoriteScriptCommand.Scenes
         {
             MessageWindow.Show(
                 "以降の実装は消えてなくなりました。\n" +
-                "これ ダークライの しわざです。"
+                "これ ダークライの しわざです。\n"
                 );
 
             context.Quit();
@@ -75,7 +75,7 @@ namespace MyFavoriteScriptCommand.Scenes
         /// <param name="message">例外の原因を説明するエラー メッセージ。</param>
         private void ThrowException(string message)
         {
-            throw new NotImplementedException("リサイクルしちゃうぞー!");
+            throw new NotImplementedException(message);
         }
     }
 }
